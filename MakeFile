@@ -1,0 +1,22 @@
+CC = gcc
+CFLAGS = -Wall -m64
+DEPS = board.h negamax.h bitfunctions.h
+OBJ = src/main.o src/negamax.o src/board.o src/bitfunctions.o
+EXEC = wraith.exe          # Name of the executable
+
+
+# Pattern rule to compile .c files to .o files
+src\%.o: src\%.c $(DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+# Target to link the object files into an executable
+Wraith: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Run command to execute the program
+run: wraith
+	./$(EXEC)
+
+# Clear target to remove generated files
+clear:
+	del src\*.o $(EXEC)  # Deletes object files and the executable
